@@ -2,7 +2,7 @@ import './App.css';
 import React from "react";
 
 function App() {
-  const [textInput, setTextInput] = React.useState('Here is some example text.');
+  const [textInput, setTextInput] = React.useState('Type text here...');
   const [conversionMode, setConversionMode] = React.useState('lowercase');
   const [textOutput, setTextOutput] = React.useState('');
 
@@ -16,7 +16,8 @@ function App() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    setTextOutput('Your formatted text will go here!')
+    conversionMode == 'lowercase' ? setTextOutput(textInput.toLowerCase()) : setTextOutput(textInput.toUpperCase());
+    setTextInput('Type text here...');
   };
 
   return (
