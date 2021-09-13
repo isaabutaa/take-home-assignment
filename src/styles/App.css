@@ -47,3 +47,12 @@ output {
   text-align: left;
   white-space: pre;
 }
+
+fieldset {
+  border: none;
+}
+
+legend {
+  font-weight: 500; 
+  padding: 2px;
+}
