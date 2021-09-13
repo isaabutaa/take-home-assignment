@@ -1,4 +1,5 @@
 import './App.css';
+import './fonts.css';
 import React, { useState } from "react";
 
 function App() {
@@ -7,14 +8,20 @@ function App() {
   const [textOutput, setTextOutput] = useState('');
   const [colorSelection, setColorSelection] = useState('blue');
   const [textColor, setTextColor] = useState('');
+  const [fontSelection, setFontSelection] = useState("'Alfa Slab One', cursive");
+  const [textFont, setTextFont] = useState('');
 
   const handleRadioChange = event => {
     setConversionMode(event.target.value);
-  }
+  };
 
   const handleColorChange = e => {
     setColorSelection(e.target.value);
-  }
+  };
+
+  const handleFontChange = e => {
+    setFontSelection(e.target.value);
+  };
 
   const handleTextareaChange = event => {
     setTextInput(event.target.value);
@@ -24,10 +31,13 @@ function App() {
     event.preventDefault();
     conversionMode == 'lowercase' ? setTextOutput(textInput.toLowerCase()) : setTextOutput(textInput.toUpperCase());
     setTextColor(colorSelection);
+    setTextFont(fontSelection);
     setTextInput('Type text here...');
   };
 
   const fieldsetStyles = { border: 'none' };
+  const legendStyles = { fontWeight: '500', padding: '2px' };
+  const textOutputStyles = { color: textColor, fontFamily: textFont };
 
   return (
     <div className="App">
@@ -44,36 +54,36 @@ function App() {
             />
           </div>
           <fieldset style={fieldsetStyles}>
-            <legend>Select whether to convert text to uppercase or lowercase:</legend>
+            <legend style={legendStyles}>Select whether to convert text to uppercase or lowercase:</legend>
             <div className="form-control form-control__radio">
               <input
                 type="radio"
                 name="conversion"
-                id="conversion-0"
+                id="lowercase"
                 value="lowercase"
                 checked={conversionMode === "lowercase"}
                 onChange={handleRadioChange}
               />
-              <label htmlFor="conversion-0">Convert text to lowercase</label>
+              <label htmlFor="lowercase">Convert text to lowercase</label>
             </div>
             <div className="form-control form-control__radio">
               <input
                 type="radio"
                 name="conversion"
-                id="conversion-1"
+                id="uppercase"
                 value="uppercase"
                 checked={conversionMode === "uppercase"}
                 onChange={handleRadioChange}
               />
-              <label htmlFor="conversion-1">Convert text to uppercase</label>
+              <label htmlFor="uppercase">Convert text to uppercase</label>
             </div>
           </fieldset>
           <fieldset style={fieldsetStyles}>
-            <legend>Select which color you want the text to be:</legend>
+            <legend style={legendStyles}>Select which color you want the text to be:</legend>
             <div className="form-control form-control__radio">
               <input
                 type="radio"
-                name="colorSelection"
+                name="color selection"
                 id="blue"
                 value="blue"
                 checked={colorSelection === "blue"}
@@ -84,7 +94,7 @@ function App() {
             <div className="form-control form-control__radio">
               <input
                 type="radio"
-                name="colorSelection"
+                name="color selection"
                 id="purple"
                 value="purple"
                 checked={colorSelection === "purple"}
@@ -95,7 +105,7 @@ function App() {
             <div className="form-control form-control__radio">
               <input
                 type="radio"
-                name="colorSelection"
+                name="color selection"
                 id="green"
                 value="green"
                 checked={colorSelection === "green"}
@@ -104,10 +114,46 @@ function App() {
               <label htmlFor="green">Change text color to <span style={{color: 'green'}}>Green</span></label>
             </div>
           </fieldset>
+          <fieldset style={fieldsetStyles} name="font selection">
+            <legend style={legendStyles}>Select which font you want the text to be:</legend>
+            <div className="form-control form-control__radio">
+              <input
+                type="radio"
+                name="font selection"
+                id="alfaSlabOne"
+                value="'Alfa Slab One', cursive"
+                checked={fontSelection === "'Alfa Slab One', cursive"}
+                onChange={handleFontChange}
+              />
+              <label htmlFor="alfaSlabOne">Change font to <span style={{fontFamily: "'Alfa Slab One', cursive"}}>Alfa Slab One</span></label>
+            </div>
+            <div className="form-control form-control__radio">
+              <input
+                type="radio"
+                name="font selection"
+                id="righteous"
+                value="'Righteous', cursive"
+                checked={fontSelection === "'Righteous', cursive"}
+                onChange={handleFontChange}
+              />
+              <label htmlFor="righteous">Change font to <span style={{fontFamily: "'Righteous', cursive"}}>Righteous</span></label>
+            </div>
+            <div className="form-control form-control__radio">
+              <input
+                type="radio"
+                name="font selection"
+                id="spaceMono"
+                value="'Space Mono', monospace"
+                checked={fontSelection === "'Space Mono', monospace"}
+                onChange={handleFontChange}
+              />
+              <label htmlFor="spaceMono">Change font to <span style={{fontFamily: "'Space Mono', monospace"}}>Space Mono</span></label>
+            </div>
+          </fieldset>
           <input type="submit" value="Submit" />
           <div className="result-wrapper form-control form-control__text">
             <label htmlFor="result">Converted text:</label>
-            <output id="result" style={{color: textColor}}>{textOutput}</output>
+            <output id="result" style={textOutputStyles}>{textOutput}</output>
           </div>
         </form>
     </div>
