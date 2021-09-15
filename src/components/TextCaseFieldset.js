@@ -28,6 +28,17 @@ const TextCaseFieldset = (props) => {
         />
         <label htmlFor="uppercase">Convert text to uppercase</label>
       </div>
+      <div className="form-control form-control__radio">
+        <input
+          type="radio"
+          name="conversion"
+          id="samecase"
+          value="samecase"
+          checked={conversionMode === "samecase"}
+          onChange={handleRadioChange}
+        />
+        <label htmlFor="samecase">Keep the same casing</label>
+      </div>
     </fieldset>
   );
 };

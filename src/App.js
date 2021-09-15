@@ -16,6 +16,7 @@ function App() {
 
   const handleRadioChange = event => {
     setConversionMode(event.target.value);
+    console.log('Case selection: ', conversionMode)
   };
 
   const handleColorChange = e => {
@@ -32,7 +33,13 @@ function App() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    conversionMode == 'lowercase' ? setTextOutput(textInput.toLowerCase()) : setTextOutput(textInput.toUpperCase());
+    if(conversionMode === 'lowercase') {
+      setTextOutput(textInput.toLowerCase())
+    } else if(conversionMode === 'uppercase') {
+      setTextOutput(textInput.toUpperCase())
+    } else {
+      setTextOutput(textInput)
+    }
     setTextColor(colorSelection);
     setTextFont(fontSelection);
     setTextInput('Type text here...');
